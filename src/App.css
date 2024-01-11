@@ -1,3 +1,17 @@
+.description{
+  font-style: italic;
+  color: #a3a3a3;
+}
+
+.main-bg{
+  height: 500px;
+  background-image: url(./img/bg.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+
+
 .App {
   text-align: center;
 }
