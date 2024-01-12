@@ -6,8 +6,9 @@
 .main-bg{
   height: 500px;
   background-image: url(./img/bg.jpeg);
-  background-size: cover;
+  background-size: 80%;
   background-position: center;
+  
 }
 
 
