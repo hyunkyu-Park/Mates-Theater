@@ -27,11 +27,18 @@ function App() {
       </Navbar>
       <div className='main-bg'></div>
       
-      <div className='row'> 
-        <Movie images = {images} movies = {movies} post = {0}/>
-        <Movie images = {images} movies = {movies} post = {1}/>
-        <Movie images = {images} movies = {movies} post = {2}/>
+      <div className='row'>
+        {
+          images.map(function(image, i){
+            return (
+              <Movie image = {image} movies = {movies} post = {i}/>
+            )
+          })
+        }
       </div>
+
+      
+
     </div>
   );
 }
@@ -39,7 +46,7 @@ function App() {
 function Movie(props){
   return(
     <div className="col-md-4">
-      <img src={props.images[props.post]} width="60%" />
+      <img src={props.image} width="60%" />
       <h4>{props.movies[props.post].title}</h4>
       <p className='description'>{props.movies[props.post].content}</p>
     </div>
