@@ -60,8 +60,13 @@ function App() {
         }/>
 
         <Route path='/review' 
-        
         />
+
+        <Route path='*' element={
+          <div>
+            <h1>Oops! 404 - Page not found</h1>
+          </div>
+        }/>
       </Routes>
     </div>
   );
