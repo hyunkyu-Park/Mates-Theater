@@ -10,7 +10,7 @@ import review2 from './img/review2.jpeg'
 import review3 from './img/review3.jpg'
 import {movie, review} from './data.js'
 import { useState } from 'react';
-import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
+import {Routes, Route, Link, useNavigate, outle} from 'react-router-dom'
 import MovieList from './pages/future.js';
 import ReviewList from './pages/past.js';
 
