@@ -10,8 +10,8 @@ import review2 from './img/review2.jpeg'
 import review3 from './img/review3.jpg'
 import {movie, review} from './data.js'
 import { useState } from 'react';
-import {Routes, Route, Link, useNavigate, outle} from 'react-router-dom'
-import MovieList from './pages/future.js';
+import {Routes, Route, Link, useNavigate, outlet} from 'react-router-dom'
+import {MovieList, MovieDetail} from './pages/future.js';
 import ReviewList from './pages/past.js';
 
 function App() {
@@ -46,11 +46,11 @@ function App() {
           }
         />
 
-        <Route path='/future' element={
-          <>
-          <MovieList images={images} movies={movies}/>
-          </>
-        }/>
+        <Route path='/future' element={<MovieList images={images} movies={movies}/>}>
+          <Route path=':id' element={<MovieDetail images={images} movies={movies}/>}/>
+
+
+        </Route>
 
         <Route path='/past' element={
           <>
