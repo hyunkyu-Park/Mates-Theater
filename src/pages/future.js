@@ -13,7 +13,7 @@ function MovieList({ images, movies }) {
             <Movie image={image} movies={movies} post={i} />
           ))}
         </div>
-        <Outlet></Outlet>
+          <Outlet ></Outlet>
       </div>
     </>
   );
