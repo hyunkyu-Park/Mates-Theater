@@ -16,18 +16,15 @@
 .movie_detail{
   position: absolute;
   width: 30%;
-  top: 35%;
-  left: 50%;
+  top: 45%;
+  left: 20%;
   transform: translate(-50%, -50%);
 }
 
 .wrapper {
-  width: 100%; /* 너비 100% */
-  margin: 0; /* 외부 여백을 없애기 위해 0으로 설정 */
-  padding: 20px; /* 필요에 따라 내부 여백 설정 */
-  box-sizing: border-box; /* 내부 여백과 테두리를 포함한 전체 너비/높이를 지정 */
-  border: #282c34;
-  background-color: #61dafb;
+  width: 20%; /* 너비 100% */
+  
+  background-color: black;
 }
 
 
