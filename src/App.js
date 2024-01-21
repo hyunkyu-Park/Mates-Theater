@@ -1,7 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
-import bg1 from "./img/bg1.avif";
 import m1 from "./img/m1.jpeg";
 import m2 from "./img/m2.jpeg";
 import m3 from "./img/m3.jpg";

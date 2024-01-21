@@ -17,13 +17,13 @@ function MovieList({ images, movies }) {
 }
 
 function Movie(props) {
-  let { id } = useParams();
-
   return (
     <div className="col-md-4">
-      <img src={props.image} width="60%" />
-      <h4>{props.movies[props.post].title}</h4>
-      <p className="description">{props.movies[props.post].content}</p>
+      <Link to={`/future/${props.post}`} style={{ textDecoration: "none" }}>
+        <img src={props.image} width="60%" />
+        <h4>{props.movies[props.post].title}</h4>
+        <p className="description">{props.movies[props.post].content}</p>
+      </Link>
     </div>
   );
 }
