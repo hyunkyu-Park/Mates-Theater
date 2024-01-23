@@ -7,7 +7,7 @@ import review1 from "./img/review1.jpeg";
 import review2 from "./img/review2.jpeg";
 import review3 from "./img/review3.jpg";
 import { movie, review } from "./data.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate, outlet } from "react-router-dom";
 import MovieList from "./pages/future.js";
 import ReviewList from "./pages/past.js";
@@ -18,6 +18,13 @@ function App() {
   let [movies, setMovies] = useState(movie);
   let [review_images] = useState([review1, review2, review3]);
   let [reviews, setReviews] = useState(review);
+  let [timer, setTimer] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimer(true);
+    }, 2000);
+  });
 
   return (
     <div className="App">
@@ -45,7 +52,12 @@ function App() {
 
         <Route
           path="/future/"
-          element={<MovieList images={images} movies={movies} />}
+          element={
+            <>
+              {timer == false ? <Timer></Timer> : null}
+              <MovieList images={images} movies={movies} />
+            </>
+          }
         />
         <Route
           path="/future/:id"
@@ -73,6 +85,14 @@ function App() {
         />
       </Routes>
     </div>
+  );
+}
+
+function Timer() {
+  return (
+    <>
+      <div>2초 이내 구매시 할인~!</div>
+    </>
   );
 }
 

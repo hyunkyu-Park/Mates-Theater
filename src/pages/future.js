@@ -8,7 +8,7 @@ function MovieList({ images, movies }) {
       <div className="container">
         <div className="row">
           {images.map((image, i) => (
-            <Movie image={image} movies={movies} post={i} />
+            <Movie key={i} image={image} movies={movies} post={i} />
           ))}
         </div>
       </div>
