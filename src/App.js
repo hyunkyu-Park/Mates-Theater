@@ -21,10 +21,13 @@ function App() {
   let [timer, setTimer] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       setTimer(true);
     }, 2000);
-  });
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -91,7 +94,7 @@ function App() {
 function Timer() {
   return (
     <>
-      <div>2초 이내 구매시 할인~!</div>
+      <div>오늘의 깜짝 운세~!</div>
     </>
   );
 }
