@@ -20,6 +20,9 @@ function App() {
   let [reviews, setReviews] = useState(review);
   let [timer, setTimer] = useState(false);
 
+  let [postname, setPostname] = useState([]);
+  let [input, setInput] = useState("");
+
   useEffect(() => {
     let timer = setTimeout(() => {
       setTimer(true);
@@ -48,6 +51,7 @@ function App() {
           element={
             <>
               <div className="main-bg"></div>
+              {timer == false ? <Timer></Timer> : null}
               <MovieList images={images} movies={movies} />
             </>
           }
@@ -57,7 +61,6 @@ function App() {
           path="/future/"
           element={
             <>
-              {timer == false ? <Timer></Timer> : null}
               <MovieList images={images} movies={movies} />
             </>
           }
@@ -76,7 +79,31 @@ function App() {
           }
         />
 
-        <Route path="/review" />
+        <Route
+          path="/review"
+          element={
+            <>
+              <div>
+                <input
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    let copy = [...postname];
+                    copy.unshift(input);
+                    setPostname(copy);
+                  }}
+                >
+                  New Post!
+                </button>
+
+                <p>{postname}</p>
+              </div>
+            </>
+          }
+        />
 
         <Route
           path="*"
