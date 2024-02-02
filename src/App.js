@@ -12,6 +12,7 @@ import { Routes, Route, Link, useNavigate, outlet } from "react-router-dom";
 import MovieList from "./pages/future.js";
 import ReviewList from "./pages/past.js";
 import MovieDetail from "./pages/movieDetail.js";
+import axios from "axios";
 
 function App() {
   let [images] = useState([m1, m2, m3]);
@@ -100,6 +101,18 @@ function App() {
                 </button>
 
                 <p>{postname}</p>
+              </div>
+
+              <div>
+                <button onClick={() => {
+                  axios.get('https://codingapple1.github.io/shop/data2.jsonss')
+                  .then((result)=>{
+                    console.log(result.data)})
+                  .catch(()=>{
+                    console.log("실패함 ㅅㄱ")
+                  })
+
+                }}>버튼</button>
               </div>
             </>
           }
