@@ -105,7 +105,7 @@ function App() {
 
               <div>
                 <button onClick={() => {
-                  axios.get('https://codingapple1.github.io/shop/data2.jsonss')
+                  axios.get('https://codingapple1.github.io/shop/data2.json')
                   .then((result)=>{
                     console.log(result.data)})
                   .catch(()=>{
