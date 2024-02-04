@@ -113,6 +113,31 @@ function App() {
                   })
 
                 }}>버튼</button>
+                <button
+                  onClick={() => {
+                    axios.get('https://api.themoviedb.org/3/discover/movie', {
+                      params: {
+                        include_adult: 'false',
+                        include_video: 'false',
+                        language: 'en-US',
+                        page: '1',
+                        sort_by: 'popularity.desc'
+                      },
+                      headers: {
+                        accept: 'application/json',
+                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWYyMGM3ZDVhMzA0NmExYWY1ZGE2Y2MxYzgwZDIzMCIsInN1YiI6IjY1YmYxMWFiYTdlMzYzMDFiNzU1OWYzNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qnPVZ3E8x4LT0U7eYATrv7Ki9qVk2DNogJzOReqTZjU'
+                      }
+                    })
+                      .then((response) => {
+                        console.log(response.data);
+                      })
+                      .catch((error) => {
+                        console.error(error);
+                      });
+                  }}
+                >
+                  버튼2
+                </button>
               </div>
             </>
           }
