@@ -1,5 +1,5 @@
 import "./App.css";
-import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
+import { Navbar, Container, Nav, Row, Col, Dropdown } from "react-bootstrap";
 import m1 from "./img/m1.jpeg";
 import m2 from "./img/m2.jpeg";
 import m3 from "./img/m3.jpg";
@@ -24,11 +24,10 @@ function App() {
   let [review_images] = useState([review1, review2, review3]);
   let [reviews, setReviews] = useState(review);
 
-  let [postname, setPostname] = useState([]);
   let [input, setInput] = useState("");
   const [movie_ranking, setMovieRanking] = useState([]);
   const [error, setError] = useState(null);
-  let [year, setYear] = useState(2017)
+  let [year, setYear] = useState(2024)
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -38,6 +37,10 @@ function App() {
       clearTimeout(timer);
     };
   }, []);
+
+  useEffect(() => {
+    handleClick(year);
+  }, [year]);
 
   const handleClick = (year) => {
     
@@ -121,78 +124,31 @@ function App() {
           element={
             <>
               <div>
-                <input
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    let copy = [...postname];
-                    copy.unshift(input);
-                    setPostname(copy);
-                  }}
-                >
-                  New Post!
-                </button>
-
-                <p>{postname}</p>
-              </div>
-
-              <div>
-                <button onClick={() => {
-                  axios.get('https://codingapple1.github.io/shop/data2.json')
-                  .then((result)=>{
-                    console.log(result.data)})
-                  .catch(()=>{
-                    console.log("실패함 ㅅㄱ")
-                  })
-
-                }}>버튼</button>
-                <button
-                  onClick={() => {
-                    axios.get('https://api.themoviedb.org/3/discover/movie', {
-                      params: {
-                        include_adult: 'false',
-                        include_video: 'false',
-                        language: 'en-US',
-                        page: '1',
-                        sort_by: 'popularity.desc'
-                      },
-                      headers: {
-                        accept: 'application/json',
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWYyMGM3ZDVhMzA0NmExYWY1ZGE2Y2MxYzgwZDIzMCIsInN1YiI6IjY1YmYxMWFiYTdlMzYzMDFiNzU1OWYzNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qnPVZ3E8x4LT0U7eYATrv7Ki9qVk2DNogJzOReqTZjU'
-                      }
-                    })
-                      .then((response) => {
-                        console.log(response.data);
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  }}
-                >
-                  버튼2
-                </button>
-
                 <div>
-                  <h1>2017년 미국에서 가장 인기 있었던 영화</h1>
-                  <button onClick={() => handleClick(year)}>
-                    버튼3
-                  </button>
+                  <h1>Movie Ranking</h1>
+                  <input onChange={(e) => setInput(e.target.value)} />
+                  <button onClick={() => setYear(input)}>This is filter</button>
+                  
                   {error && <p style={{ color: 'red' }}>{error}</p>}
-                  <ul>
-                    {movie_ranking.map(movie => (
-                      <li key={movie.id}>
-                        {movie.title}
-                      </li>
-                    ))}
-                  </ul>
+
+                  <MovieList 
+                    images={movie_ranking.map(movie => `https://image.tmdb.org/t/p/w200${movie.poster_path}`)} 
+                    movies={movie_ranking.map(movie => ({
+                      title: movie.title,
+                      overview: movie.overview,
+                      id: movie.id  
+                    }))} 
+                  />
                 </div>
-              
+
               </div>
             </>
           }
+        />
+        
+        <Route
+          path="/search/:id"
+          element={<MovieDetail />}
         />
 
         <Route
