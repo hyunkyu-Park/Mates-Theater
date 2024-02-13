@@ -24,7 +24,6 @@ function App() {
   let [review_images] = useState([review1, review2, review3]);
   let [reviews, setReviews] = useState(review);
 
-  let [input, setInput] = useState("");
   const [movie_ranking, setMovieRanking] = useState([]);
   const [error, setError] = useState(null);
   let [year, setYear] = useState(2024)
@@ -43,11 +42,18 @@ function App() {
   }, []);
 
   useEffect(() => {
-    handleClick(year);
-  }, [year]);
+    handleClick();
+  }, []);
 
-  const handleClick = (year) => {
-    getMovieRanking(year, setMovieRanking, setError);
+  const handleClick = () => {
+    getMovieRanking(
+      {
+        year: year,
+        genreId: selectedGenres.length > 0 ? selectedGenres : null,
+      },
+      setMovieRanking,
+      setError
+    );
   };
   
   useEffect(() => {
@@ -109,8 +115,8 @@ function App() {
               <div>
                 <div>
                   <h1>Movie Ranking</h1>
-                  <input onChange={(e) => setInput(e.target.value)} />
-                  <button onClick={() => setYear(input)}>This is filter</button>
+                  <input onChange={(e) => setYear(e.target.value)} />
+                  <button onClick={() => { handleClick()}}>This is filter</button>
                   {error && <p style={{ color: 'red' }}>{error}</p>}
 
                   <div>

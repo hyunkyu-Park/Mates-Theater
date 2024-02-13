@@ -24,7 +24,7 @@ export const getMovieRanking = (params, setMovieRanking, setError) => {
     if (genreId) {
         requestParams.with_genres = genreId;
     }
-
+    
     axios.get('https://api.themoviedb.org/3/discover/movie', {
     params: requestParams,
         headers: {
@@ -41,6 +41,7 @@ export const getMovieRanking = (params, setMovieRanking, setError) => {
         setMovieRanking([]);
         setError('Oops! Can`t find movie Info');
     });
+    
 };
 
 export const getGenres = (setGenres, setError) => {
