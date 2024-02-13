@@ -12,7 +12,7 @@ import { Routes, Route, Link, useNavigate, outlet } from "react-router-dom";
 import MovieList from "./pages/future.js";
 import ReviewList from "./pages/past.js";
 import MovieDetail from "./pages/movieDetail.js";
-import {getMovieRanking, getGenres} from "./pages/movieApi.js";
+import SearchPage from "./pages/search.js";
 
 function App() {
   const apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWYyMGM3ZDVhMzA0NmExYWY1ZGE2Y2MxYzgwZDIzMCIsInN1YiI6IjY1YmYxMWFiYTdlMzYzMDFiNzU1OWYzNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qnPVZ3E8x4LT0U7eYATrv7Ki9qVk2DNogJzOReqTZjU';
@@ -24,13 +24,6 @@ function App() {
   let [review_images] = useState([review1, review2, review3]);
   let [reviews, setReviews] = useState(review);
 
-  const [movie_ranking, setMovieRanking] = useState([]);
-  const [error, setError] = useState(null);
-  let [year, setYear] = useState(2024)
-  const [genres, setGenres] = useState([]);
-  const [genreError, setGenreError] = useState(null);
-  
-  const [selectedGenres, setSelectedGenres] = useState([]);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -40,26 +33,6 @@ function App() {
       clearTimeout(timer);
     };
   }, []);
-
-  useEffect(() => {
-    handleClick();
-  }, []);
-
-  const handleClick = () => {
-    getMovieRanking(
-      {
-        year: year,
-        genreId: selectedGenres.length > 0 ? selectedGenres : null,
-      },
-      setMovieRanking,
-      setError
-    );
-  };
-  
-  useEffect(() => {
-    // getGenres 함수를 호출하여 장르 목록을 가져옵니다.
-    getGenres(setGenres, setGenreError);
-  }, []); // 컴포넌트가 마운트될 때 한 번만 호출되도록 빈 배열을 전달합니다.
 
   return (
     <div className="App">
@@ -110,43 +83,7 @@ function App() {
 
         <Route
           path="/search"
-          element={
-            <>
-              <div>
-                <div>
-                  <h1>Movie Ranking</h1>
-                  <input onChange={(e) => setYear(e.target.value)} />
-                  <button onClick={() => { handleClick()}}>This is filter</button>
-                  {error && <p style={{ color: 'red' }}>{error}</p>}
-
-                  <div>
-                    <h3>Genres</h3>
-                    <div>
-                      <ToggleButtonGroup type="checkbox" value={selectedGenres} onChange={setSelectedGenres}>
-                        {genres.map((genre) => (
-                          <ToggleButton variant="outline-dark" key={genre.id} id={`tbg-btn-${genre.id}`} value={genre.id} className="btn-primary" >
-                            {genre.name}
-                          </ToggleButton>
-                        ))}
-                      </ToggleButtonGroup>
-                      {genreError && <p style={{ color: 'red' }}>{genreError}</p>}
-                    </div>
-                  </div>
-                  
-                  
-
-                  <MovieList 
-                    images={movie_ranking.map(movie => `https://image.tmdb.org/t/p/w200${movie.poster_path}`)} 
-                    movies={movie_ranking.map(movie => ({
-                      title: movie.title,
-                      overview: movie.overview,
-                      id: movie.id  
-                    }))} 
-                  />
-                </div>
-
-              </div>
-            </>
+          element={<SearchPage/> 
           }
         />
         
