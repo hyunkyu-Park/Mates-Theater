@@ -1,5 +1,5 @@
 import "./App.css";
-import { Navbar, Container, Nav, Row, Col, Dropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import m1 from "./img/m1.jpeg";
 import m2 from "./img/m2.jpeg";
 import m3 from "./img/m3.jpg";
@@ -12,7 +12,7 @@ import { Routes, Route, Link, useNavigate, outlet } from "react-router-dom";
 import MovieList from "./pages/future.js";
 import ReviewList from "./pages/past.js";
 import MovieDetail from "./pages/movieDetail.js";
-import axios from "axios";
+import {getMovieRanking, getGenres} from "./pages/movieApi.js";
 
 function App() {
   const apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWYyMGM3ZDVhMzA0NmExYWY1ZGE2Y2MxYzgwZDIzMCIsInN1YiI6IjY1YmYxMWFiYTdlMzYzMDFiNzU1OWYzNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qnPVZ3E8x4LT0U7eYATrv7Ki9qVk2DNogJzOReqTZjU';
@@ -28,6 +28,10 @@ function App() {
   const [movie_ranking, setMovieRanking] = useState([]);
   const [error, setError] = useState(null);
   let [year, setYear] = useState(2024)
+  const [genres, setGenres] = useState([]);
+  const [genreError, setGenreError] = useState(null);
+  
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -43,34 +47,13 @@ function App() {
   }, [year]);
 
   const handleClick = (year) => {
-    
-    axios.get('https://api.themoviedb.org/3/discover/movie', {
-      params: {
-        api_key: apiKey,
-        language: 'en-US',
-        sort_by: 'popularity.desc',
-        include_adult: true,
-        include_video: false,
-        page: 1,
-        primary_release_year: year,
-        region: 'US',
-      },
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWYyMGM3ZDVhMzA0NmExYWY1ZGE2Y2MxYzgwZDIzMCIsInN1YiI6IjY1YmYxMWFiYTdlMzYzMDFiNzU1OWYzNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qnPVZ3E8x4LT0U7eYATrv7Ki9qVk2DNogJzOReqTZjU', // 여기에 실제 액세스 토큰을 넣어주세요.
-      }
-    })
-      .then((response) => {
-        setMovieRanking(response.data.results);
-        setError(null);
-      })
-      .catch((error) => {
-        console.error(error);
-        setMovieRanking([]);
-        setError('영화 정보를 가져오는 중에 오류가 발생했습니다.');
-      });
+    getMovieRanking(year, setMovieRanking, setError);
   };
   
+  useEffect(() => {
+    // getGenres 함수를 호출하여 장르 목록을 가져옵니다.
+    getGenres(setGenres, setGenreError);
+  }, []); // 컴포넌트가 마운트될 때 한 번만 호출되도록 빈 배열을 전달합니다.
 
   return (
     <div className="App">
@@ -128,8 +111,23 @@ function App() {
                   <h1>Movie Ranking</h1>
                   <input onChange={(e) => setInput(e.target.value)} />
                   <button onClick={() => setYear(input)}>This is filter</button>
-                  
                   {error && <p style={{ color: 'red' }}>{error}</p>}
+
+                  <div>
+                    <h3>Genres</h3>
+                    <div>
+                      <ToggleButtonGroup type="checkbox" value={selectedGenres} onChange={setSelectedGenres}>
+                        {genres.map((genre) => (
+                          <ToggleButton variant="outline-dark" key={genre.id} id={`tbg-btn-${genre.id}`} value={genre.id} className="btn-primary" >
+                            {genre.name}
+                          </ToggleButton>
+                        ))}
+                      </ToggleButtonGroup>
+                      {genreError && <p style={{ color: 'red' }}>{genreError}</p>}
+                    </div>
+                  </div>
+                  
+                  
 
                   <MovieList 
                     images={movie_ranking.map(movie => `https://image.tmdb.org/t/p/w200${movie.poster_path}`)} 
