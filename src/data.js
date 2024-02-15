@@ -25,22 +25,22 @@ let review = [
   {
     id : 0,
     title : "Cruella",
-    M_review : "진짜 너무 보고 싶었는데 오빠가 같이 봐줬다 히히",
-    H_review : "민하가 보자고 해서 봤는데 생각보다 재밌었다",
+    M_review : "I really wanted to watch and he watched it with me. Hehe",
+    H_review : "She asked me to watch it and it was more fun than I thought",
   },
 
   {
     id : 1,
     title : "knives Out",
-    M_review : "보다가 너무 졸려서 도망쳤다..꾸버억",
-    H_review : "딱 기대만큼 재밌었다. 반전 아주 맛있어",
+    M_review : "I dozed off while watching a movie..",
+    H_review : "It was as fun as I expected. The twist is amazing",
   },
 
   {
     id : 2,
     title : "holidate",
-    M_review : "오빠가 재밌다고 해서 봤는데 짱재밌었당. 우리 첫 영화!!",
-    H_review : "예전에 인상 깊게 봐서 여자친구 생기면 같이 보고 싶었는데, 그 사람이 바로 하민이였네",
+    M_review : "He said it was fun, so I watched with him and it was really fun. Our first movie!!",
+    H_review : "I was impressed, so I wanted to see this again when I had a girlfriend. That was you.",
   }
 ] 
 

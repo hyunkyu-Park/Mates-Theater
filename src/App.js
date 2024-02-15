@@ -108,7 +108,8 @@ function App() {
 function Timer() {
   return (
     <>
-      <div>오늘의 깜짝 운세~!</div>
+      <div>Todays fortune: I know you are ready travel
+      </div>
     </>
   );
 }

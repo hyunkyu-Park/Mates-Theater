@@ -3,6 +3,7 @@ import axios from "axios";
 const apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWYyMGM3ZDVhMzA0NmExYWY1ZGE2Y2MxYzgwZDIzMCIsInN1YiI6IjY1YmYxMWFiYTdlMzYzMDFiNzU1OWYzNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qnPVZ3E8x4LT0U7eYATrv7Ki9qVk2DNogJzOReqTZjU';
 
 export const getMovieRanking = (params, setMovieRanking, setError) => {
+    
     const { year, genreId } = params;
 
     const requestParams = {
@@ -24,7 +25,6 @@ export const getMovieRanking = (params, setMovieRanking, setError) => {
     if (genreId) {
         requestParams.with_genres = genreId;
     }
-    
     axios.get('https://api.themoviedb.org/3/discover/movie', {
     params: requestParams,
         headers: {
@@ -33,6 +33,7 @@ export const getMovieRanking = (params, setMovieRanking, setError) => {
         }
     })
     .then((response) => {
+        
         setMovieRanking(response.data.results);
         setError(null);
     })
@@ -45,6 +46,7 @@ export const getMovieRanking = (params, setMovieRanking, setError) => {
 };
 
 export const getGenres = (setGenres, setError) => {
+    
     axios.get('https://api.themoviedb.org/3/genre/movie/list', {
         params: {
             api_key: apiKey,
