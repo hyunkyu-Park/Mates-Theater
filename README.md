@@ -1,5 +1,5 @@
 # Mates Theater Web Application
-[![MovieMate_video][(동영상 썸네일 이미지 URL)](동영상 공유 링크)](https://youtu.be/uD5d56NX0xI)
+https://youtu.be/uD5d56NX0xI
 
 
 ## Introduction
